@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ski Trip 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#dfe7f1; --card:#fff; --ink:#14202e; --muted:#55657a; --line:#cfd9e6;
+  --plagne:#0b6bcb; --plagne-soft:#e6f1fc; --alpes:#7a8696; --alpes-soft:#eef2f7;
+  --good:#11845b; --warn:#b45309; --hero1:#0b3d73; --hero2:#0b6bcb; --badge-ink:#fff;
+  --shadow:0 1px 2px rgba(15,40,70,.06),0 8px 22px rgba(15,40,70,.09);
+  --flake:#8fb1d8; --snow:#fff; --snow-line:#b4c4d8;
+}
+:root[data-theme="dark"]{
+  --bg:#0d141c; --card:#1e2b3a; --ink:#e7edf4; --muted:#a3b1c2; --line:#314254;
+  --plagne:#5aa9f5; --plagne-soft:#1a3550; --alpes:#8d99a8; --alpes-soft:#253446;
+  --good:#4cc79a; --warn:#f0a35c; --hero1:#0a2440; --hero2:#0d4a8a; --badge-ink:#06213d;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
+  --flake:#d6e6f7; --snow:#e8f0f8; --snow-line:#8ea3bb;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;padding:48px 0 88px;position:relative;overflow:hidden}
+header .wrap{position:relative}
+.theme{position:absolute;top:-32px;right:16px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font:inherit;font-size:14px;padding:6px 14px;border-radius:999px;cursor:pointer}
+.theme:hover{background:rgba(255,255,255,.25)}
+@media (max-width:760px){header .theme{position:static;display:block;margin:-24px 0 16px auto}}
+header h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.02em}
+header p{margin:0;opacity:.9;max-width:640px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:4px 12px;border-radius:999px;font-size:14px}
+main.wrap{padding-top:56px;padding-bottom:48px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;position:relative;box-shadow:var(--shadow)}
+.card.pick{border:2px solid var(--plagne);box-shadow:var(--shadow),0 10px 30px rgba(11,107,203,.18)}
+.badge{position:absolute;top:-13px;left:20px;background:var(--plagne);color:var(--badge-ink);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
+.card h2{margin:4px 0 2px;font-size:22px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.price{font-size:34px;font-weight:800;letter-spacing:-.02em}
+.price small{font-size:15px;font-weight:500;color:var(--muted)}
+.pick .price{color:var(--plagne)}
+dl{margin:16px 0 0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:15px}
+dt{color:var(--muted)} dd{margin:0;font-weight:500;text-align:right}
+dd.total{font-weight:800}
+hr{border:0;border-top:1px solid var(--line);margin:4px 0;grid-column:1/-1}
+.pill{display:inline-block;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;margin-top:12px}
+.pill.good{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)}
+.pill.warn{background:color-mix(in srgb,var(--warn) 15%,transparent);color:var(--warn)}
+section{margin-top:40px}
+section>h3{font-size:20px;margin:0 0 14px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:15px;box-shadow:var(--shadow)}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+thead th{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--alpes-soft)}
+thead th.p{color:var(--plagne);background:var(--plagne-soft)}
+td.p{background:var(--plagne-soft);font-weight:600}
+td.l{color:var(--muted);width:28%}
+.win::after{content:" ✓";color:var(--good);font-weight:800}
+.tablewrap{overflow-x:auto;border-radius:16px}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.why div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.why b{display:block;margin-bottom:4px}
+.why span{color:var(--muted);font-size:14px}
+.note{background:var(--card);border-left:4px solid var(--plagne);border-radius:10px;padding:16px 18px;margin-top:14px;box-shadow:var(--shadow)}
+.runs{display:flex;gap:6px;flex-wrap:wrap}
+.r{font-size:13px;font-weight:700;padding:2px 8px;border-radius:6px;color:#fff}
+.g{background:#1f9d55}.b{background:#2563eb}.rd{background:#dc2626}.k{background:#111827;outline:1px solid #555}
+footer{color:var(--muted);font-size:13px;padding:24px 0 40px;border-top:1px solid var(--line)}
+.drift{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:56px;display:block}
+.drift path{fill:var(--bg)}
+.hero-snowman{position:absolute;bottom:22px;right:max(24px,calc(50% - 500px));width:96px;height:132px}
+@media (max-width:760px){.hero-snowman{display:none}}
+.body{fill:var(--snow);stroke:var(--snow-line);stroke-width:1.5}
+.goodbye{display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:48px 0 8px;color:var(--ink);font-weight:600}
+.goodbye svg{width:54px;height:74px}
+.goodbye svg.small{width:40px;height:55px}
+.snowfall{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden}
+.snowfall span{position:absolute;top:-24px;color:var(--flake);line-height:1;user-select:none;animation:fall linear infinite}
+@keyframes fall{to{transform:translate(var(--drift),110vh) rotate(180deg)}}
+@media (prefers-reduced-motion: reduce){.snowfall span{animation:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="snowman" viewBox="0 0 80 110">
+    <line x1="25" y1="50" x2="9" y2="38" stroke="#7c4a1e" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="55" y1="50" x2="71" y2="36" stroke="#7c4a1e" stroke-width="2.5" stroke-linecap="round"/>
+    <circle class="body" cx="40" cy="86" r="22"/>
+    <circle class="body" cx="40" cy="53" r="16"/>
+    <circle class="body" cx="40" cy="27" r="12"/>
+    <rect x="31" y="5" width="18" height="12" rx="2" fill="#1f2937"/>
+    <rect x="26" y="15" width="28" height="4" rx="2" fill="#1f2937"/>
+    <circle cx="36" cy="25" r="1.7" fill="#1f2937"/><circle cx="44" cy="25" r="1.7" fill="#1f2937"/>
+    <path d="M40 28 L53 30.5 L40 32 Z" fill="#f97316"/>
+    <rect x="28" y="37" width="24" height="5" rx="2.5" fill="#dc2626"/>
+    <rect x="43" y="39" width="5" height="13" rx="2" fill="#dc2626"/>
+    <circle cx="40" cy="50" r="1.8" fill="#1f2937"/><circle cx="40" cy="58" r="1.8" fill="#1f2937"/>
+  </symbol>
+</svg>
+<div class="snowfall" id="snowfall" aria-hidden="true"></div>
+<header>
+  <div class="wrap">
+    <button class="theme" id="theme" type="button">Dark mode</button>
+    <h1>Ski Trip 2027: two options</h1>
+    <p>8 of us, 7 nights in the French Alps, flying from Manchester in mid-January. Here's how the two shortlisted trips compare, and why we think La Plagne is worth the extra.</p>
+    <div class="chips">
+      <span class="chip">8 adults</span>
+      <span class="chip">7 nights</span>
+      <span class="chip">Flights from Manchester</span>
+      <span class="chip">Coach transfers included</span>
+    </div>
+  </div>
+  <svg class="hero-snowman snowman" style="--snow:#fff;--snow-line:rgba(255,255,255,.7)" aria-hidden="true"><use href="#snowman"/></svg>
+  <svg class="drift" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 34 C120 14 240 40 380 28 C520 16 600 6 760 22 C900 36 1020 12 1200 26 L1200 56 L0 56 Z"/></svg>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+    <div class="card pick">
+      <span class="badge">Our pick</span>
+      <h2>La Plagne</h2>
+      <p class="sub">Hotel Club MMV Plagne 2000 · Plagne Aime 2000<br>Sun 17 Jan → Sun 24 Jan 2027</p>
+      <div class="price">£1,427 <small>per person, all-in</small></div>
+      <dl>
+        <dt>Holiday (flights, hotel, transfers)</dt><dd>£1,073.86</dd>
+        <dt>6-day lift pass</dt><dd>£335.00</dd>
+        <dt>Tourist tax (paid in resort)</dt><dd>£18.61</dd>
+        <dt>Dinners out</dt><dd>Included</dd>
+        <hr>
+        <dt><b>Total per person</b></dt><dd class="total">£1,427.47</dd>
+        <dt>Group total (8)</dt><dd>£11,419.76</dd>
+      </dl>
+      <span class="pill good">Half board · free wine with dinner</span>
+    </div>
+
+    <div class="card">
+      <h2>Les Deux Alpes</h2>
+      <p class="sub">Hôtel de la Valentin<br>Sat 16 Jan → Sat 23 Jan 2027</p>
+      <div class="price">£1,467 <small>per person, all-in*</small></div>
+      <dl>
+        <dt>Holiday (flights, hotel, transfers)</dt><dd>£884.14</dd>
+        <dt>6-day lift pass</dt><dd>£297.00</dd>
+        <dt>Tourist tax (paid in resort)</dt><dd>£6.14</dd>
+        <dt>Dinners out* (7 × ~£40)</dt><dd>~£280</dd>
+        <hr>
+        <dt><b>Total per person</b></dt><dd class="total">~£1,467</dd>
+        <dt>Group total (8)</dt><dd>~£11,738</dd>
+      </dl>
+      <span class="pill warn">Bed &amp; breakfast only</span>
+    </div>
+  </div>
+  <div class="note" style="margin-top:20px"><b>On paper La Plagne is £240 more per person. In practice it's about the same, or even cheaper.</b> Les Deux Alpes only includes breakfast, so a week of dinners out at ~£40 a head puts it at ~£1,467pp. That's <b>about £40 more than La Plagne</b>, which includes dinner and wine every night.</div>
+  <p class="sub" style="margin-top:12px">*Les Deux Alpes is B&amp;B, so we'd be buying dinner every night. £40 a head is an estimate. At £30 it's ~£1,397pp, at £50 ~£1,537pp. Without dinners it's £1,187.28pp (£9,498 for the group).</p>
+
+  <section>
+    <h3>Side by side</h3>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th></th><th class="p">La Plagne</th><th>Les Deux Alpes</th></tr></thead>
+      <tbody>
+        <tr><td class="l">Dates</td><td class="p">Sun 17 – Sun 24 Jan 2027</td><td>Sat 16 – Sat 23 Jan 2027</td></tr>
+        <tr><td class="l">Board</td><td class="p win">Half board: buffet breakfast, afternoon snack, buffet dinner with free wine</td><td>B&amp;B: continental breakfast + pancakes, afternoon cake in the bar</td></tr>
+        <tr><td class="l">Getting to the slopes</td><td class="p win">Ski-in / ski-out on the Golf blue run</td><td>2 min walk to the Belle Etoile lift</td></tr>
+        <tr><td class="l">Hotel extras</td><td class="p">Spa &amp; wellness, bar (pay via room key)</td><td>Bar with live music, family-run</td></tr>
+        <tr><td class="l">Guest rating</td><td class="p">3.8/5 (265 reviews)</td><td class="win">4.5/5 (177 reviews)</td></tr>
+        <tr><td class="l">Transfer</td><td class="p win">~2h30 from Chambéry</td><td>~3h30 from Lyon</td></tr>
+        <tr><td class="l">Ski area</td><td class="p win">225 km local · <b>425 km</b> Paradiski (with Les Arcs)</td><td>~200–220 km</td></tr>
+        <tr><td class="l">Runs</td><td class="p win"><div class="runs"><span class="r g">8 green</span><span class="r b">74 blue</span><span class="r rd">35 red</span><span class="r k">18 black</span></div><small>~135 runs</small></td><td><div class="runs"><span class="r g">13 green</span><span class="r b">43 blue</span><span class="r rd">15 red</span><span class="r k">9 black</span></div><small>~80 runs</small></td></tr>
+        <tr><td class="l">Ski area altitude<br><small>lowest – highest point</small></td><td class="p">1,250 – 3,250 m</td><td>1,300 – 3,600 m (glacier)</td></tr>
+        <tr><td class="l">Where we'd sleep<br><small>altitude of the village</small></td><td class="p win">~2,100 m</td><td>~1,650 m</td></tr>
+        <tr><td class="l">Snow reliability</td><td class="p win">Very good. One of the highest villages in the resort, snow to the door</td><td>Very good up top (glacier); lower runs back to the village can be thin or icy</td></tr>
+        <tr><td class="l">Holiday price</td><td class="p">£1,073.86pp (£8,590.88 group)</td><td class="win">£884.14pp (£7,073.12 group)</td></tr>
+        <tr><td class="l">Lift pass (6 days)</td><td class="p">£335</td><td class="win">£297</td></tr>
+        <tr><td class="l">All-in per person</td><td class="p win">£1,427.47 (dinners included)</td><td>~£1,467 (with ~£40/night dinners)</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h3>Why La Plagne is worth the extra</h3>
+    <div class="why">
+      <div><b>Dinner sorted every night</b><span>Half board with free wine. No hunting for a table for 8, no splitting bills. Once you count dinners, it's actually the cheaper trip.</span></div>
+      <div><b>Ski out the front door</b><span>Clip in at the hotel and ski back to it on a blue. Easy for everyone, whatever their level.</span></div>
+      <div><b>Twice the terrain</b><span>~135 runs and 425 km with Les Arcs: 74 blues for improvers, 35 reds and 18 blacks for the confident lot.</span></div>
+      <div><b>Better for a mixed group</b><span>Linked blues mean beginners and stronger skiers can ride together. In Deux Alpes the easy runs are at the top, and beginners usually have to take the lift down.</span></div>
+      <div><b>Sleeping at 2,100 m</b><span>Mid-January at that height is about as snow-sure as the Alps get.</span></div>
+      <div><b>Shorter transfer</b><span>About an hour less on the coach each way.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Good to know</h3>
+    <div class="note"><b>Equipment rental isn't included in either price.</b> Sort out your own skis, boards and boots: rent in resort, book online in advance, or bring your own.</div>
+    <div class="note"><b>Lift passes are on top</b> of the holiday price in both cases (6-day pass, shown above), but they are already included in the totals shown.</div>
+    <div class="note"><b>Tourist tax</b> is paid at the hotel in euros: €21.21 per person at La Plagne (about £18.61), €7 per person at Les Deux Alpes (about £6.14). It is already included in the totals shown.</div>
+  </section>
+
+  <div class="goodbye" aria-hidden="true">
+    <svg class="snowman"><use href="#snowman"/></svg>
+    <svg class="snowman small"><use href="#snowman"/></svg>
+    <span>See you on the slopes</span>
+  </div>
+  <footer>
+    Prices from Crystal Ski, per person based on 8 adults sharing 4 rooms, including flights from Manchester and coach transfers. £ conversions at £1 = €1.14. Prices and availability can change until booked. Run counts from resort / tourist office figures.
+  </footer>
+</main>
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme');
+  var dark=function(){return root.getAttribute('data-theme')==='dark';};
+  var label=function(){btn.textContent=dark()?'Light mode':'Dark mode';};
+  try{var saved=localStorage.getItem('theme');if(saved)root.setAttribute('data-theme',saved);}catch(e){}
+  label();
+  btn.addEventListener('click',function(){
+    var next=dark()?'light':'dark';root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next);}catch(e){}
+    label();
+  });
+
+  var field=document.getElementById('snowfall');
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var glyphs=['❄','❅','❆','•'];
+  for(var i=0;i<34;i++){
+    var f=document.createElement('span');
+    f.textContent=glyphs[i%glyphs.length];
+    f.style.left=(Math.random()*100)+'vw';
+    f.style.fontSize=(8+Math.random()*12)+'px';
+    f.style.opacity=(.35+Math.random()*.4).toFixed(2);
+    if(still){f.style.top=(Math.random()*100)+'vh';}
+    else{
+      var dur=16+Math.random()*18;
+      f.style.animationDuration=dur+'s';
+      f.style.animationDelay=(-Math.random()*dur)+'s';
+      f.style.setProperty('--drift',((Math.random()-.5)*120)+'px');
+    }
+    field.appendChild(f);
+  }
+})();
+</script>
+</body>
+</html>
